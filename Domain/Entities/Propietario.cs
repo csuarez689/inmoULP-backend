@@ -11,7 +11,7 @@ public class Propietario
     public int id { get; set; }
 
     [Column("dni")]
-    public int dni { get; set; }
+    public string dni { get; set; }
 
     [Column("nombre")]
     public string nombre { get; set; }

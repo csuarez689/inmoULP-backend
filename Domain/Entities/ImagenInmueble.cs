@@ -13,10 +13,10 @@ public class ImagenInmueble
     [Column("url")]
     public string url { get; set; }
 
-    [Column("id_inmueble")]
-    public int id_inmueble { get; set; }
+    [Column("inmueble_id")]
+    public int inmueble_id { get; set; }
 
-    [ForeignKey("id_inmueble")]
+    [ForeignKey("inmueble_id")]
     public Inmueble Inmueble { get; set; }
 
 }

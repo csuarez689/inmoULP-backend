@@ -20,22 +20,28 @@ public class Inmueble
     public int superficie { get; set; }
 
     [Column("latitud")]
-    public decimal latitud { get; set; }
+    public string latitud { get; set; }
 
     [Column("longitud")]
-    public decimal longitud { get; set; }
+    public string longitud { get; set; }
 
-    [Column("id_tipo")]
-    public int id_tipo { get; set; }
+    [Column("tipo_id")]
+    public int tipo_id { get; set; }
 
-    [ForeignKey("id_tipo")]
+    [ForeignKey("tipo_id")]
     public TipoInmueble Tipo { get; set; }
 
-    [Column("id_uso")]
-    public int id_uso { get; set; }
+    [Column("uso_id")]
+    public int uso_id { get; set; }
 
-    [ForeignKey("id_uso")]
+    [ForeignKey("uso_id")]
     public UsoInmueble Uso { get; set; }
+
+    [Column("propietario_id")]
+    public int propietario_id { get; set; }
+
+    [ForeignKey("propietario_id")]
+    public Propietario Propietario { get; set; }
 
     [Column("disponible")]
     public bool disponible { get; set; } = true;
@@ -43,14 +49,9 @@ public class Inmueble
     [Column("precio")]
     public decimal precio { get; set; }
 
-    [Column("id_propietario")]
-    public int id_propietario { get; set; }
-
-    [ForeignKey("id_propietario")]
-    public Propietario Propietario { get; set; }
 
     public ICollection<Contrato> Contratos { get; set; }
     
-    public ICollection<ImagenInmueble> Imagenes { get; set; }
+    public virtual ImagenInmueble? Imagen { get; set; } 
 
 }

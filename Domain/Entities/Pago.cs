@@ -22,9 +22,9 @@ public class Pago
     [Column("estado")]
     public bool estado { get; set; }
 
-    [Column("id_contrato")]
-    public int id_contrato { get; set; }
+    [Column("contrato_id")]
+    public int contrato_id { get; set; }
 
-    [ForeignKey("id_contrato")]
+    [ForeignKey("contrato_id")]
     public Contrato Contrato { get; set; }
 }

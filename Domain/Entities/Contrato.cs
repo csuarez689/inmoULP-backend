@@ -19,16 +19,16 @@ public class Contrato
     [Column("monto_alquiler")]
     public double montoAlquiler { get; set; }
 
-    [Column("id_inmueble")]
-    public int id_inmueble { get; set; }
+    [Column("inmueble_id")]
+    public int inmueble_id { get; set; }
 
-    [ForeignKey("id_inmueble")]
+    [ForeignKey("inmueble_id")]
     public Inmueble Inmueble { get; set; }
 
-    [Column("id_inquilino")]
-    public int id_inquilino { get; set; }
+    [Column("inquilino_id")]
+    public int inquilino_id { get; set; }
 
-    [ForeignKey("id_inquilino")]
+    [ForeignKey("inquilino_id")]
     public Inquilino Inquilino { get; set; }
 
     [Column("estado")]

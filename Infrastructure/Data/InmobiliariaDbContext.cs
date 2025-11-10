@@ -26,11 +26,32 @@ public class InmobiliariaDbContext : DbContext
         // Configuración de Propietario
         modelBuilder.Entity<Propietario>(entity =>
         {
-            entity.Property(p => p.nombre).HasMaxLength(100).IsRequired();
-            entity.Property(p => p.apellido).HasMaxLength(100).IsRequired();
-            entity.Property(p => p.email).HasMaxLength(255).IsRequired();
-            entity.Property(p => p.telefono).HasMaxLength(20).IsRequired();
-            entity.Property(p => p.password).HasMaxLength(500);
+            entity.Property(p => p.dni)
+                .IsRequired()
+                .HasMaxLength(9);
+                
+            entity.Property(p => p.nombre)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.Property(p => p.apellido)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.Property(p => p.email)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            entity.Property(p => p.telefono)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            entity.Property(p => p.password)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            entity.Property(p => p.activo)
+                .HasDefaultValue(true);
             
             entity.HasIndex(p => p.dni).IsUnique();
             entity.HasIndex(p => p.email).IsUnique();
@@ -54,8 +75,8 @@ public class InmobiliariaDbContext : DbContext
         {
             entity.Property(i => i.direccion).HasMaxLength(500);
             entity.Property(i => i.precio).HasColumnType("decimal(18,2)");
-            entity.Property(i => i.latitud).HasColumnType("decimal(10,8)");
-            entity.Property(i => i.longitud).HasColumnType("decimal(11,8)");
+            entity.Property(i => i.latitud).HasMaxLength(20);
+            entity.Property(i => i.longitud).HasMaxLength(20);
         });
 
         // Configuración de Contrato

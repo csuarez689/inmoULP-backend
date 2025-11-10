@@ -1,4 +1,5 @@
-using InmobiliariaAPI.API.Utils;
+using InmobiliariaAPI.Application.Utils;
+using InmobiliariaAPI.API.Filters;
 using InmobiliariaAPI.Domain.Contracts;
 using InmobiliariaAPI.Infrastructure.Data;
 using InmobiliariaAPI.Infrastructure.Repositories;
@@ -8,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
+using InmobiliariaAPI.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,9 +56,9 @@ builder.Services.AddAuthorization(options =>
 
 // registrar servicios de contexto y repositorios
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IPropietarioRepository, PropietarioRepository>();
 builder.Services.AddScoped<IInmuebleRepository, InmuebleRepository>();
+builder.Services.AddScoped<AuthPropietarioFilter>();
 
 // configurar controllers
 builder.Services.AddControllers();
@@ -144,9 +146,13 @@ app.UseCors("AllowAll");
 
 app.UseAuthentication();
 
+
 app.UseAuthorization();
 
 app.UseStaticFiles(); // para servir imagenes
+
+app.UseMiddleware<ExceptionMiddleware>(); //manejador de errores
+
 
 app.MapControllers();
 

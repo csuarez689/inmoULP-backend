@@ -12,4 +12,8 @@ public interface IPropietarioRepository
     Task<Propietario?> GetByEmail(string email, bool? activo = null);
 
     Task<int> Update(Propietario propietario);
+
+    Task<bool> DniExists(string dni, int? excludeId = null);
+    
+    Task<bool> EmailExists(string email, int? excludeId = null);
 }

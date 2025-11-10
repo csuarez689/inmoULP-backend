@@ -8,11 +8,10 @@ namespace InmobiliariaAPI.Domain.Contracts;
 
 public interface IInmuebleRepository
 {
-    Task<Inmueble?> GetById(int id, bool? disponible = null);
+    Task<List<Inmueble>> GetByPropietario(int propietarioId);
 
-    Task<List<Inmueble>> GetByPropietario(int propietarioId, bool? disponible = null);
+    Task<Inmueble?> GetById(int id);
 
-    Task<int> Add(Inmueble inmueble);
+    Task<Inmueble> Update(Inmueble inmueble);
 
-    Task<int> Update(Inmueble inmueble);
 }

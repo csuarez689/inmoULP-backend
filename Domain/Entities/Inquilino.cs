@@ -10,8 +10,8 @@ public class Inquilino
     [Column("id")]
     public int id { get; set; }
 
-    [Column("dni")]
-    public int dni { get; set; }
+    [Column("dni", TypeName = "varchar(15)")] 
+    public string dni { get; set; }
 
     [Column("nombre")]
     public string nombre { get; set; }
