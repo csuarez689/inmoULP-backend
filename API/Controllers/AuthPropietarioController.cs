@@ -65,26 +65,29 @@ public class AuthPropietarioController : ControllerBase
         {
             if (await _propietarioRepository.DniExists(dto.dni, propietario.id))
             {
-                return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-                {
-                    { "dni", new[] { "DNI ya registrado" } }
-                }));
+                ModelState.AddModelError(nameof(dto.dni), "DNI ya registrado");
             }
-
-            propietario.dni = dto.dni;
+            else
+            {
+                propietario.dni = dto.dni;
+            }
         }
 
         if (!dto.email.Equals(propietario.email, StringComparison.OrdinalIgnoreCase))
         {
             if (await _propietarioRepository.EmailExists(dto.email, propietario.id))
             {
-                return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-                {
-                    { "email", new[] { "Email ya registrado" } }
-                }));
+                ModelState.AddModelError(nameof(dto.email), "Email ya registrado");
             }
+            else
+            {
+                propietario.email = dto.email;
+            }
+        }
 
-            propietario.email = dto.email;
+        if (!ModelState.IsValid)
+        {
+            return ValidationProblem(ModelState);
         }
 
         propietario.nombre = dto.nombre;
@@ -106,22 +109,24 @@ public class AuthPropietarioController : ControllerBase
         
         // Validar contraseña actual
         if (!PasswordHasher.VerifyPassword(dto.CurrentPassword, propietario.password, _configuration["Salt"]!))
-            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-            {
-                { "currentPassword", new[] { "Contraseña actual incorrecta" } }
-            }));
+        {
+            ModelState.AddModelError(nameof(dto.CurrentPassword), "Contraseña actual incorrecta");
+        }
 
         if (dto.NewPassword != dto.ConfirmPassword)
-            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-            {
-                { "confirmPassword", new[] { "Las contraseñas no coinciden" } }
-            }));
+        {
+            ModelState.AddModelError(nameof(dto.ConfirmPassword), "Las contraseñas no coinciden");
+        }
 
         if (dto.NewPassword == dto.CurrentPassword)
-            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
-            {
-                { "newPassword", new[] { "La nueva contraseña debe ser diferente a la actual" } }
-            }));
+        {
+            ModelState.AddModelError(nameof(dto.NewPassword), "La nueva contraseña debe ser diferente a la actual");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return ValidationProblem(ModelState);
+        }
 
         // Actualizar contraseña
         propietario.password = PasswordHasher.HashPassword(dto.NewPassword, _configuration["Salt"]!);
