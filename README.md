@@ -89,8 +89,10 @@ La clase `DataSeeder` se ejecuta en `OnModelCreating`, por lo que cada `database
 
 ## 📄 Documentación (Swagger)
 
-- **Ejecución local**: `http://localhost:5057/swagger` (puerto configurado en `launchSettings.json`/`dotnet watch`).
-- **Docker Compose**: `http://localhost:5000/swagger` (mapeo del contenedor `api`).
+El proyecto configura Swagger sin prefijo (`RoutePrefix = string.Empty`), por lo que la interfaz queda disponible directamente en la raíz del sitio.
+
+- **Ejecución local**: `http://localhost:5057` (puerto configurado en `launchSettings.json`/`dotnet watch`).
+- **Docker Compose**: `http://localhost:5000` (mapeo del contenedor `api`).
 
 Desde allí podés probar endpoints autenticados, revisar contratos disponibles y descargar el JSON/OpenAPI.
 
