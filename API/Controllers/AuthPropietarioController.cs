@@ -13,7 +13,7 @@ using System.Security.Claims;
 namespace InmobiliariaAPI.API.Controllers;
 
 [ApiController]
-[Route("api/auth/propietario")]
+[Route("api/propietarios")]
 public class AuthPropietarioController : ControllerBase
 {
     private readonly ILogger<AuthPropietarioController> _logger;
@@ -36,7 +36,7 @@ public class AuthPropietarioController : ControllerBase
     /// <summary>
     /// LOGIN - Autenticar propietario
     /// </summary>
-    [HttpPost()]
+    [HttpPost("login")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -73,7 +73,7 @@ public class AuthPropietarioController : ControllerBase
     /// <summary>
     /// Obtener perfil del propietario autenticado
     /// </summary>
-    [HttpGet()]
+    [HttpGet("me")]
     [Authorize]
     [ProducesResponseType(typeof(PropietarioDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -108,7 +108,7 @@ public class AuthPropietarioController : ControllerBase
     /// <summary>
     /// Actualizar perfil del propietario autenticado
     /// </summary>
-    [HttpPut()]
+    [HttpPut("me")]
     [Authorize]
     [ProducesResponseType(typeof(PropietarioDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -165,7 +165,7 @@ public class AuthPropietarioController : ControllerBase
     /// <summary>
     /// Cambiar contraseña del propietario autenticado
     /// </summary>
-    [HttpPut("changepassword")]
+    [HttpPut("me/changepassword")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

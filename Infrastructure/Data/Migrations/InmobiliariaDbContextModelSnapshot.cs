@@ -372,60 +372,6 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                     b.ToTable("usos_inmueble");
                 });
 
-            modelBuilder.Entity("InmobiliariaAPI.Domain.Entities.Usuario", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    b.Property<string>("apellido")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("apellido");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("nombre");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)")
-                        .HasColumnName("password");
-
-                    b.Property<int>("rol")
-                        .HasColumnType("int")
-                        .HasColumnName("rol");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("email")
-                        .IsUnique();
-
-                    b.ToTable("usuarios");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            apellido = "Sistema",
-                            email = "admin@inmobiliaria.com",
-                            nombre = "Admin",
-                            password = "7WJ3b3aActlm6nINXM8wAEI1UCovzqb3l6epF7wdZ+c=",
-                            rol = 0
-                        });
-                });
-
             modelBuilder.Entity("InmobiliariaAPI.Domain.Entities.Contrato", b =>
                 {
                     b.HasOne("InmobiliariaAPI.Domain.Entities.Inmueble", "Inmueble")

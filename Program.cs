@@ -11,21 +11,21 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar Serilog
+// configurar log
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
 builder.Host.UseSerilog();
 
-// Configurar DbContext con MySQL
+// configurar dbcontext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<InmobiliariaDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
         b => b.MigrationsAssembly("InmobiliariaAPI")
               .MigrationsHistoryTable("__EFMigrationsHistory")));
 
-// Configurar JWT Authentication
+// configurar jwt
 var jwtSecret = builder.Configuration["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret no configurado");
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 var jwtAudience = builder.Configuration["Jwt:Audience"];
@@ -52,15 +52,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Propietario", policy => policy.RequireRole("Propietario"));
 });
 
-// Registrar servicios de contexto de usuario y repositorios
+// registrar servicios de contexto y repositorios
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IPropietarioRepository, PropietarioRepository>();
+builder.Services.AddScoped<IInmuebleRepository, InmuebleRepository>();
 
-// Configurar Controllers
+// configurar controllers
 builder.Services.AddControllers();
 
-// Configurar CORS
+// configurar cors
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -71,7 +72,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configurar Swagger con autenticación JWT
+// configurar endpoints y swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -87,7 +88,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
-    // Configurar autenticación JWT en Swagger
+    // configurar autenticación jwt en swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -114,7 +115,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Aplicar migraciones automáticamente en desarrollo
+// aplicar migraciones automáticamente en desarrollo
 if (app.Environment.IsDevelopment())
 {
     using (var scope = app.Services.CreateScope())
@@ -124,14 +125,14 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-// Configure the HTTP request pipeline
+// configurar swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Inmobiliaria API v1");
-        c.RoutePrefix = string.Empty; // Swagger en la raíz
+        c.RoutePrefix = string.Empty; // swagger en la raiz
     });
 }
 
@@ -142,9 +143,10 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.UseStaticFiles(); // Para servir imágenes
+app.UseStaticFiles(); // para servir imagenes
 
 app.MapControllers();
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using InmobiliariaAPI.Domain.Entities;
-using InmobiliariaAPI.Domain.Enums;
 using InmobiliariaAPI.Application.Utils;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,15 +13,6 @@ public static class DataSeeder
         const string salt = "h7H9gK2pQz8LwS6rXjD4fN1tVbY0eU";
         var hash = PasswordHasher.HashPassword("admin123", salt);
         
-        modelBuilder.Entity<Usuario>().HasData(new Usuario
-        {
-            id = 1,
-            nombre = "Admin",
-            apellido = "Sistema",
-            email = "admin@inmobiliaria.com",
-            password = hash,
-            rol = RolUsuario.Administrador
-        });
 
         var propietarios = new List<Propietario>
         {

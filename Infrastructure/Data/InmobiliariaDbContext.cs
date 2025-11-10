@@ -16,7 +16,6 @@ public class InmobiliariaDbContext : DbContext
     public DbSet<Contrato> Contratos { get; set; }
     public DbSet<Pago> Pagos { get; set; }
     public DbSet<ImagenInmueble> ImagenesInmuebles { get; set; }
-    public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<TipoInmueble> TiposInmueble { get; set; }
     public DbSet<UsoInmueble> UsosInmueble { get; set; }
 
@@ -49,17 +48,7 @@ public class InmobiliariaDbContext : DbContext
             entity.HasIndex(i => i.email).IsUnique();
         });
 
-        // Configuración de Usuario
-        modelBuilder.Entity<Usuario>(entity =>
-        {
-            entity.Property(u => u.nombre).HasMaxLength(100).IsRequired();
-            entity.Property(u => u.apellido).HasMaxLength(100).IsRequired();
-            entity.Property(u => u.email).HasMaxLength(255).IsRequired();
-            entity.Property(u => u.password).HasMaxLength(500).IsRequired();
-            
-            entity.HasIndex(u => u.email).IsUnique();
-        });
-
+        
         // Configuración de Inmueble
         modelBuilder.Entity<Inmueble>(entity =>
         {

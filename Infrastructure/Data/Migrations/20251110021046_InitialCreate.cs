@@ -95,28 +95,6 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "usuarios",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    apellido = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    password = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    rol = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_usuarios", x => x.id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "inmuebles",
                 columns: table => new
                 {
@@ -248,11 +226,6 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                     { 5, true, "Lopez", 22345678, "ana.lopez@example.com", "Ana", "7WJ3b3aActlm6nINXM8wAEI1UCovzqb3l6epF7wdZ+c=", "2664000005" }
                 });
 
-            migrationBuilder.InsertData(
-                table: "usuarios",
-                columns: new[] { "id", "apellido", "email", "nombre", "password", "rol" },
-                values: new object[] { 1, "Sistema", "admin@inmobiliaria.com", "Admin", "7WJ3b3aActlm6nINXM8wAEI1UCovzqb3l6epF7wdZ+c=", 0 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_contratos_id_inmueble",
                 table: "contratos",
@@ -311,12 +284,6 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 table: "propietarios",
                 column: "email",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_usuarios_email",
-                table: "usuarios",
-                column: "email",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -327,9 +294,6 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "pagos");
-
-            migrationBuilder.DropTable(
-                name: "usuarios");
 
             migrationBuilder.DropTable(
                 name: "contratos");
