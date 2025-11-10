@@ -45,6 +45,21 @@ public class AuthPropietarioController : ControllerBase
         return Ok(new { token = GenerateJwtToken(propietario) });
     }
 
+    [HttpPost("resetpassword")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto request)
+    {
+        var propietario = await _propietarioRepository.GetByEmail(request.Email, true);
+        if (propietario != null)
+        {
+            const string newPassword = "123456";
+            propietario.password = PasswordHasher.HashPassword(newPassword, _configuration["Salt"]!);
+            await _propietarioRepository.Update(propietario);
+        }
+        //Simular envio de correo xD
+        return Ok(new { message = "Se ha enviado un correo con instrucciones para reestablecer su contraseña" });
+    }
+
     [HttpGet("me")]
     [Authorize]
     [ServiceFilter(typeof(AuthPropietarioFilter))]
