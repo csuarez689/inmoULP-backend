@@ -47,18 +47,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Administrador", policy => policy.RequireRole("Administrador"));
-    options.AddPolicy("Empleado", policy => policy.RequireRole("Administrador", "Empleado"));
-    options.AddPolicy("Propietario", policy => policy.RequireRole("Propietario"));
-});
-
 // registrar servicios de contexto y repositorios
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<AuthPropietarioFilter>();
 builder.Services.AddScoped<IPropietarioRepository, PropietarioRepository>();
 builder.Services.AddScoped<IInmuebleRepository, InmuebleRepository>();
-builder.Services.AddScoped<AuthPropietarioFilter>();
+builder.Services.AddScoped<IContratoRepository, ContratoRepository>();
+builder.Services.AddScoped<IPagoRepository, PagoRepository>();
 
 // configurar controllers
 builder.Services.AddControllers();

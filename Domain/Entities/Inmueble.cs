@@ -11,7 +11,7 @@ public class Inmueble
     public int id { get; set; }
 
     [Column("direccion")]
-    public string direccion { get; set; }
+    public string direccion { get; set; } = string.Empty;
 
     [Column("ambientes")]
     public int ambientes { get; set; }
@@ -20,28 +20,28 @@ public class Inmueble
     public int superficie { get; set; }
 
     [Column("latitud")]
-    public string latitud { get; set; }
+    public string latitud { get; set; } = string.Empty;
 
     [Column("longitud")]
-    public string longitud { get; set; }
+    public string longitud { get; set; } = string.Empty;
 
     [Column("tipo_id")]
     public int tipo_id { get; set; }
 
     [ForeignKey("tipo_id")]
-    public TipoInmueble Tipo { get; set; }
+    public TipoInmueble Tipo { get; set; } = null!;
 
     [Column("uso_id")]
     public int uso_id { get; set; }
 
     [ForeignKey("uso_id")]
-    public UsoInmueble Uso { get; set; }
+    public UsoInmueble Uso { get; set; } = null!;
 
     [Column("propietario_id")]
     public int propietario_id { get; set; }
 
     [ForeignKey("propietario_id")]
-    public Propietario Propietario { get; set; }
+    public Propietario Propietario { get; set; } = null!;
 
     [Column("disponible")]
     public bool disponible { get; set; } = true;
@@ -50,8 +50,8 @@ public class Inmueble
     public decimal precio { get; set; }
 
 
-    public ICollection<Contrato> Contratos { get; set; }
+    public ICollection<Contrato> Contratos { get; set; } = new List<Contrato>();
     
-    public virtual ImagenInmueble? Imagen { get; set; } 
+    public virtual ImagenInmueble? Imagen { get; set; }  = null!;
 
 }

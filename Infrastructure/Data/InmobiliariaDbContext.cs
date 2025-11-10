@@ -60,9 +60,13 @@ public class InmobiliariaDbContext : DbContext
         // Configuración de Inquilino
         modelBuilder.Entity<Inquilino>(entity =>
         {
+            entity.Property(p => p.dni)
+                .IsRequired()
+                .HasMaxLength(9);
+            
             entity.Property(i => i.nombre).HasMaxLength(100).IsRequired();
             entity.Property(i => i.apellido).HasMaxLength(100).IsRequired();
-            entity.Property(i => i.email).HasMaxLength(255).IsRequired();
+            entity.Property(i => i.email).HasMaxLength(100).IsRequired();
             entity.Property(i => i.telefono).HasMaxLength(20).IsRequired();
             
             entity.HasIndex(i => i.dni).IsUnique();
@@ -73,10 +77,20 @@ public class InmobiliariaDbContext : DbContext
         // Configuración de Inmueble
         modelBuilder.Entity<Inmueble>(entity =>
         {
-            entity.Property(i => i.direccion).HasMaxLength(500);
-            entity.Property(i => i.precio).HasColumnType("decimal(18,2)");
-            entity.Property(i => i.latitud).HasMaxLength(20);
-            entity.Property(i => i.longitud).HasMaxLength(20);
+            entity.Property(i => i.direccion)
+                .HasMaxLength(200)
+                .IsRequired();
+
+            entity.Property(i => i.precio)
+                .HasColumnType("decimal(18,2)");
+
+            entity.Property(i => i.latitud)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            entity.Property(i => i.longitud)
+                .HasMaxLength(20)
+                .IsRequired();
         });
 
         // Configuración de Contrato
@@ -88,7 +102,7 @@ public class InmobiliariaDbContext : DbContext
         // Configuración de Pago
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.Property(p => p.detalle).HasMaxLength(500).IsRequired();
+            entity.Property(p => p.detalle).HasMaxLength(200).IsRequired();
             entity.Property(p => p.monto).HasColumnType("decimal(18,2)");
         });
 

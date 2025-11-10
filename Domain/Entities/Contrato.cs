@@ -23,18 +23,18 @@ public class Contrato
     public int inmueble_id { get; set; }
 
     [ForeignKey("inmueble_id")]
-    public Inmueble Inmueble { get; set; }
+    public Inmueble Inmueble { get; set; } = null!;
 
     [Column("inquilino_id")]
     public int inquilino_id { get; set; }
 
     [ForeignKey("inquilino_id")]
-    public Inquilino Inquilino { get; set; }
+    public Inquilino Inquilino { get; set; } = null!;
 
     [Column("estado")]
     public bool estado { get; set; }
 
-    public ICollection<Pago> Pagos { get; set; }
+    public ICollection<Pago> Pagos { get; set; } = new List<Pago>();
 
 
 }

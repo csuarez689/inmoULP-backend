@@ -11,7 +11,7 @@ public class Pago
     public int id { get; set; }
 
     [Column("detalle")]
-    public string detalle { get; set; }
+    public string detalle { get; set; } = string.Empty;
 
     [Column("fecha_pago")]
     public DateTime fechaPago { get; set; }
@@ -26,5 +26,5 @@ public class Pago
     public int contrato_id { get; set; }
 
     [ForeignKey("contrato_id")]
-    public Contrato Contrato { get; set; }
+    public Contrato Contrato { get; set; } = null!;
 }

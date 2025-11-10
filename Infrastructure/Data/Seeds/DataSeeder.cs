@@ -16,6 +16,7 @@ public static class DataSeeder
         SeedImagenes(modelBuilder);
         SeedInquilinos(modelBuilder);
         SeedContratos(modelBuilder);
+        SeedPagos(modelBuilder);
     }
 
     private static void SeedPropietarios(ModelBuilder modelBuilder)
@@ -185,7 +186,9 @@ public static class DataSeeder
             new() { id = 22, inmueble_id = 22, url = "/uploads/inmuebles/test_casa.jpg" },
             new() { id = 23, inmueble_id = 23, url = "/uploads/inmuebles/test_casa.jpg" },
             new() { id = 24, inmueble_id = 24, url = "/uploads/inmuebles/test_casa.jpg" },
-            new() { id = 25, inmueble_id = 25, url = "/uploads/inmuebles/test_casa.jpg" }
+            new() { id = 25, inmueble_id = 25, url = "/uploads/inmuebles/test_casa.jpg" },
+            new() { id = 26, inmueble_id = 26, url = "/uploads/inmuebles/test_casa.jpg" },
+            new() { id = 27, inmueble_id = 27, url = "/uploads/inmuebles/test_casa.jpg" }
         };
 
         modelBuilder.Entity<ImagenInmueble>().HasData(imagenes);
@@ -241,4 +244,134 @@ public static class DataSeeder
 
         modelBuilder.Entity<Contrato>().HasData(contratos);
     }
+
+    private static void SeedPagos(ModelBuilder modelBuilder)
+    {
+        var pagos = new List<Pago>
+        {
+            // Contrato 1 (vigente)
+            new() { id = 1, contrato_id = 1, detalle = "Cuota enero 2024", fechaPago = new DateTime(2024, 1, 5), monto = 10000, estado = true },
+            new() { id = 2, contrato_id = 1, detalle = "Cuota febrero 2024", fechaPago = new DateTime(2024, 2, 5), monto = 10000, estado = true },
+            new() { id = 3, contrato_id = 1, detalle = "Cuota marzo 2024", fechaPago = new DateTime(2024, 3, 5), monto = 10000, estado = true },
+            new() { id = 4, contrato_id = 1, detalle = "Cuota abril 2024", fechaPago = new DateTime(2024, 4, 5), monto = 10000, estado = true },
+            new() { id = 5, contrato_id = 1, detalle = "Cuota mayo 2024", fechaPago = new DateTime(2024, 5, 5), monto = 10000, estado = true },
+            new() { id = 6, contrato_id = 1, detalle = "Cuota junio 2024", fechaPago = new DateTime(2024, 6, 5), monto = 10000, estado = true },
+
+            // Contrato 2 (vigente)
+            new() { id = 7, contrato_id = 2, detalle = "Cuota mayo 2023", fechaPago = new DateTime(2023, 5, 10), monto = 9500, estado = true },
+            new() { id = 8, contrato_id = 2, detalle = "Cuota junio 2023", fechaPago = new DateTime(2023, 6, 10), monto = 9500, estado = true },
+            new() { id = 9, contrato_id = 2, detalle = "Cuota julio 2023", fechaPago = new DateTime(2023, 7, 10), monto = 9500, estado = true },
+            new() { id = 10, contrato_id = 2, detalle = "Cuota agosto 2023", fechaPago = new DateTime(2023, 8, 10), monto = 9500, estado = true },
+            new() { id = 11, contrato_id = 2, detalle = "Cuota septiembre 2023", fechaPago = new DateTime(2023, 9, 10), monto = 9500, estado = true },
+
+            // Contrato 3 (vigente)
+            new() { id = 12, contrato_id = 3, detalle = "Cuota julio 2024", fechaPago = new DateTime(2024, 7, 8), monto = 14000, estado = true },
+            new() { id = 13, contrato_id = 3, detalle = "Cuota agosto 2024", fechaPago = new DateTime(2024, 8, 8), monto = 14000, estado = true },
+            new() { id = 14, contrato_id = 3, detalle = "Cuota septiembre 2024", fechaPago = new DateTime(2024, 9, 8), monto = 14000, estado = true },
+
+            // Contrato 4 (vigente)
+            new() { id = 15, contrato_id = 4, detalle = "Cuota noviembre 2023", fechaPago = new DateTime(2023, 11, 15), monto = 9900, estado = true },
+            new() { id = 16, contrato_id = 4, detalle = "Cuota diciembre 2023", fechaPago = new DateTime(2023, 12, 15), monto = 9900, estado = true },
+            new() { id = 17, contrato_id = 4, detalle = "Cuota enero 2024", fechaPago = new DateTime(2024, 1, 15), monto = 9900, estado = true },
+            new() { id = 18, contrato_id = 4, detalle = "Cuota febrero 2024", fechaPago = new DateTime(2024, 2, 15), monto = 9900, estado = true },
+            new() { id = 19, contrato_id = 4, detalle = "Cuota marzo 2024", fechaPago = new DateTime(2024, 3, 15), monto = 9900, estado = true },
+            new() { id = 20, contrato_id = 4, detalle = "Cuota abril 2024", fechaPago = new DateTime(2024, 4, 15), monto = 9900, estado = true },
+            new() { id = 21, contrato_id = 4, detalle = "Cuota mayo 2024", fechaPago = new DateTime(2024, 5, 15), monto = 9900, estado = true },
+            new() { id = 22, contrato_id = 4, detalle = "Cuota junio 2024", fechaPago = new DateTime(2024, 6, 15), monto = 9900, estado = true },
+
+            // Contrato 5 (vigente)
+            new() { id = 23, contrato_id = 5, detalle = "Cuota febrero 2024", fechaPago = new DateTime(2024, 2, 12), monto = 15500, estado = true },
+            new() { id = 24, contrato_id = 5, detalle = "Cuota marzo 2024", fechaPago = new DateTime(2024, 3, 12), monto = 15500, estado = true },
+            new() { id = 25, contrato_id = 5, detalle = "Cuota abril 2024", fechaPago = new DateTime(2024, 4, 12), monto = 15500, estado = true },
+            new() { id = 26, contrato_id = 5, detalle = "Cuota mayo 2024", fechaPago = new DateTime(2024, 5, 12), monto = 15500, estado = true },
+
+            // Contrato 6 (vigente)
+            new() { id = 27, contrato_id = 6, detalle = "Cuota marzo 2024", fechaPago = new DateTime(2024, 3, 18), monto = 7800, estado = true },
+            new() { id = 28, contrato_id = 6, detalle = "Cuota abril 2024", fechaPago = new DateTime(2024, 4, 18), monto = 7800, estado = true },
+            new() { id = 29, contrato_id = 6, detalle = "Cuota mayo 2024", fechaPago = new DateTime(2024, 5, 18), monto = 7800, estado = true },
+            new() { id = 30, contrato_id = 6, detalle = "Cuota junio 2024", fechaPago = new DateTime(2024, 6, 18), monto = 7800, estado = true },
+            new() { id = 31, contrato_id = 6, detalle = "Cuota julio 2024", fechaPago = new DateTime(2024, 7, 18), monto = 7800, estado = true },
+
+            // Contrato 7 (vigente)
+            new() { id = 32, contrato_id = 7, detalle = "Cuota mayo 2024", fechaPago = new DateTime(2024, 5, 20), monto = 13200, estado = true },
+            new() { id = 33, contrato_id = 7, detalle = "Cuota junio 2024", fechaPago = new DateTime(2024, 6, 20), monto = 13200, estado = true },
+            new() { id = 34, contrato_id = 7, detalle = "Cuota julio 2024", fechaPago = new DateTime(2024, 7, 20), monto = 13200, estado = true },
+            new() { id = 35, contrato_id = 7, detalle = "Cuota agosto 2024", fechaPago = new DateTime(2024, 8, 20), monto = 13200, estado = true },
+            new() { id = 36, contrato_id = 7, detalle = "Cuota septiembre 2024", fechaPago = new DateTime(2024, 9, 20), monto = 13200, estado = true },
+            new() { id = 37, contrato_id = 7, detalle = "Cuota octubre 2024", fechaPago = new DateTime(2024, 10, 20), monto = 13200, estado = true },
+
+            // Contrato 8 (vencido)
+            new() { id = 38, contrato_id = 8, detalle = "Cuota enero 2020", fechaPago = new DateTime(2020, 1, 5), monto = 5500, estado = true },
+            new() { id = 39, contrato_id = 8, detalle = "Cuota febrero 2020", fechaPago = new DateTime(2020, 2, 5), monto = 5500, estado = true },
+            new() { id = 40, contrato_id = 8, detalle = "Cuota marzo 2020", fechaPago = new DateTime(2020, 3, 5), monto = 5500, estado = true },
+            new() { id = 41, contrato_id = 8, detalle = "Cuota abril 2020", fechaPago = new DateTime(2020, 4, 5), monto = 5500, estado = true },
+            new() { id = 42, contrato_id = 8, detalle = "Cuota mayo 2020", fechaPago = new DateTime(2020, 5, 5), monto = 5500, estado = true },
+            new() { id = 43, contrato_id = 8, detalle = "Cuota junio 2020", fechaPago = new DateTime(2020, 6, 5), monto = 5500, estado = true },
+            new() { id = 44, contrato_id = 8, detalle = "Cuota julio 2020", fechaPago = new DateTime(2020, 7, 5), monto = 5500, estado = true },
+            new() { id = 45, contrato_id = 8, detalle = "Cuota agosto 2020", fechaPago = new DateTime(2020, 8, 5), monto = 5500, estado = true },
+            new() { id = 46, contrato_id = 8, detalle = "Cuota septiembre 2020", fechaPago = new DateTime(2020, 9, 5), monto = 5500, estado = true },
+            new() { id = 47, contrato_id = 8, detalle = "Cuota octubre 2020", fechaPago = new DateTime(2020, 10, 5), monto = 5500, estado = true },
+
+            // Contrato 9 (vencido)
+            new() { id = 48, contrato_id = 9, detalle = "Cuota junio 2019", fechaPago = new DateTime(2019, 6, 10), monto = 6800, estado = true },
+            new() { id = 49, contrato_id = 9, detalle = "Cuota julio 2019", fechaPago = new DateTime(2019, 7, 10), monto = 6800, estado = true },
+            new() { id = 50, contrato_id = 9, detalle = "Cuota agosto 2019", fechaPago = new DateTime(2019, 8, 10), monto = 6800, estado = true },
+            new() { id = 51, contrato_id = 9, detalle = "Cuota septiembre 2019", fechaPago = new DateTime(2019, 9, 10), monto = 6800, estado = true },
+            new() { id = 52, contrato_id = 9, detalle = "Cuota octubre 2019", fechaPago = new DateTime(2019, 10, 10), monto = 6800, estado = true },
+            new() { id = 53, contrato_id = 9, detalle = "Cuota noviembre 2019", fechaPago = new DateTime(2019, 11, 10), monto = 6800, estado = true },
+            new() { id = 54, contrato_id = 9, detalle = "Cuota diciembre 2019", fechaPago = new DateTime(2019, 12, 10), monto = 6800, estado = true },
+            new() { id = 55, contrato_id = 9, detalle = "Cuota enero 2020", fechaPago = new DateTime(2020, 1, 10), monto = 6800, estado = true },
+            new() { id = 56, contrato_id = 9, detalle = "Cuota febrero 2020", fechaPago = new DateTime(2020, 2, 10), monto = 6800, estado = true },
+
+            // Contrato 10 (vencido)
+            new() { id = 57, contrato_id = 10, detalle = "Cuota marzo 2018", fechaPago = new DateTime(2018, 3, 12), monto = 6300, estado = true },
+            new() { id = 58, contrato_id = 10, detalle = "Cuota abril 2018", fechaPago = new DateTime(2018, 4, 12), monto = 6300, estado = true },
+            new() { id = 59, contrato_id = 10, detalle = "Cuota mayo 2018", fechaPago = new DateTime(2018, 5, 12), monto = 6300, estado = true },
+            new() { id = 60, contrato_id = 10, detalle = "Cuota junio 2018", fechaPago = new DateTime(2018, 6, 12), monto = 6300, estado = true },
+            new() { id = 61, contrato_id = 10, detalle = "Cuota julio 2018", fechaPago = new DateTime(2018, 7, 12), monto = 6300, estado = true },
+            new() { id = 62, contrato_id = 10, detalle = "Cuota agosto 2018", fechaPago = new DateTime(2018, 8, 12), monto = 6300, estado = true },
+            new() { id = 63, contrato_id = 10, detalle = "Cuota septiembre 2018", fechaPago = new DateTime(2018, 9, 12), monto = 6300, estado = true },
+
+            // Contrato 11 (vencido)
+            new() { id = 64, contrato_id = 11, detalle = "Cuota septiembre 2019", fechaPago = new DateTime(2019, 9, 18), monto = 8000, estado = true },
+            new() { id = 65, contrato_id = 11, detalle = "Cuota octubre 2019", fechaPago = new DateTime(2019, 10, 18), monto = 8000, estado = true },
+            new() { id = 66, contrato_id = 11, detalle = "Cuota noviembre 2019", fechaPago = new DateTime(2019, 11, 18), monto = 8000, estado = true },
+            new() { id = 67, contrato_id = 11, detalle = "Cuota diciembre 2019", fechaPago = new DateTime(2019, 12, 18), monto = 8000, estado = true },
+            new() { id = 68, contrato_id = 11, detalle = "Cuota enero 2020", fechaPago = new DateTime(2020, 1, 18), monto = 8000, estado = true },
+            new() { id = 69, contrato_id = 11, detalle = "Cuota febrero 2020", fechaPago = new DateTime(2020, 2, 18), monto = 8000, estado = true },
+
+            // Contrato 12 (vencido)
+            new() { id = 70, contrato_id = 12, detalle = "Cuota abril 2020", fechaPago = new DateTime(2020, 4, 22), monto = 9000, estado = true },
+            new() { id = 71, contrato_id = 12, detalle = "Cuota mayo 2020", fechaPago = new DateTime(2020, 5, 22), monto = 9000, estado = true },
+            new() { id = 72, contrato_id = 12, detalle = "Cuota junio 2020", fechaPago = new DateTime(2020, 6, 22), monto = 9000, estado = true },
+            new() { id = 73, contrato_id = 12, detalle = "Cuota julio 2020", fechaPago = new DateTime(2020, 7, 22), monto = 9000, estado = true },
+            new() { id = 74, contrato_id = 12, detalle = "Cuota agosto 2020", fechaPago = new DateTime(2020, 8, 22), monto = 9000, estado = true },
+            new() { id = 75, contrato_id = 12, detalle = "Cuota septiembre 2020", fechaPago = new DateTime(2020, 9, 22), monto = 9000, estado = true },
+            new() { id = 76, contrato_id = 12, detalle = "Cuota octubre 2020", fechaPago = new DateTime(2020, 10, 22), monto = 9000, estado = true },
+            new() { id = 77, contrato_id = 12, detalle = "Cuota noviembre 2020", fechaPago = new DateTime(2020, 11, 22), monto = 9000, estado = true },
+            new() { id = 78, contrato_id = 12, detalle = "Cuota diciembre 2020", fechaPago = new DateTime(2020, 12, 22), monto = 9000, estado = true },
+            new() { id = 79, contrato_id = 12, detalle = "Cuota enero 2021", fechaPago = new DateTime(2021, 1, 22), monto = 9000, estado = true },
+
+            // Contrato 13 (vencido)
+            new() { id = 80, contrato_id = 13, detalle = "Cuota julio 2019", fechaPago = new DateTime(2019, 7, 28), monto = 7800, estado = true },
+            new() { id = 81, contrato_id = 13, detalle = "Cuota agosto 2019", fechaPago = new DateTime(2019, 8, 28), monto = 7800, estado = true },
+            new() { id = 82, contrato_id = 13, detalle = "Cuota septiembre 2019", fechaPago = new DateTime(2019, 9, 28), monto = 7800, estado = true },
+            new() { id = 83, contrato_id = 13, detalle = "Cuota octubre 2019", fechaPago = new DateTime(2019, 10, 28), monto = 7800, estado = true },
+            new() { id = 84, contrato_id = 13, detalle = "Cuota noviembre 2019", fechaPago = new DateTime(2019, 11, 28), monto = 7800, estado = true },
+            new() { id = 85, contrato_id = 13, detalle = "Cuota diciembre 2019", fechaPago = new DateTime(2019, 12, 28), monto = 7800, estado = true },
+            new() { id = 86, contrato_id = 13, detalle = "Cuota enero 2020", fechaPago = new DateTime(2020, 1, 28), monto = 7800, estado = true },
+            new() { id = 87, contrato_id = 13, detalle = "Cuota febrero 2020", fechaPago = new DateTime(2020, 2, 28), monto = 7800, estado = true },
+
+            // Contrato 14 (vencido)
+            new() { id = 88, contrato_id = 14, detalle = "Cuota mayo 2020", fechaPago = new DateTime(2020, 5, 18), monto = 9500, estado = true },
+            new() { id = 89, contrato_id = 14, detalle = "Cuota junio 2020", fechaPago = new DateTime(2020, 6, 18), monto = 9500, estado = true },
+            new() { id = 90, contrato_id = 14, detalle = "Cuota julio 2020", fechaPago = new DateTime(2020, 7, 18), monto = 9500, estado = true },
+            new() { id = 91, contrato_id = 14, detalle = "Cuota agosto 2020", fechaPago = new DateTime(2020, 8, 18), monto = 9500, estado = true },
+            new() { id = 92, contrato_id = 14, detalle = "Cuota septiembre 2020", fechaPago = new DateTime(2020, 9, 18), monto = 9500, estado = true }
+        };
+
+        modelBuilder.Entity<Pago>().HasData(pagos);
+    }
+
+
 }

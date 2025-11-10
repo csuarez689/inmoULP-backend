@@ -11,7 +11,7 @@ public class TipoInmueble
     public int id { get; set; }
 
     [Column("nombre")]
-    public string nombre { get; set; }
+    public string nombre { get; set; } = string.Empty;
 
-    public ICollection<Inmueble> Inmuebles { get; set; }
+    public ICollection<Inmueble> Inmuebles { get; set; } = new List<Inmueble>();
 }

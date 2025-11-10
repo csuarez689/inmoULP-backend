@@ -56,7 +56,11 @@ namespace InmobiliariaAPI.API.Middlewares
             if (env.IsDevelopment())
             {
                 response["details"] = exception.Message;
-                response["trace"] = exception.StackTrace?.Split(Environment.NewLine);
+                var trace = exception.StackTrace?.Split(Environment.NewLine);
+                if (trace is not null)
+                {
+                    response["trace"] = trace;
+                }
             }
 
             var options = new JsonSerializerOptions

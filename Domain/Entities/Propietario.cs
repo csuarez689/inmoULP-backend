@@ -11,26 +11,26 @@ public class Propietario
     public int id { get; set; }
 
     [Column("dni")]
-    public string dni { get; set; }
+    public string dni { get; set; } = string.Empty;
 
     [Column("nombre")]
-    public string nombre { get; set; }
+    public string nombre { get; set; } = string.Empty;
 
     [Column("apellido")]
-    public string apellido { get; set; }
+    public string apellido { get; set; } = string.Empty;
 
     [Column("email")]
-    public string email { get; set; }
+    public string email { get; set; } = string.Empty;
 
     [Column("telefono")]
-    public string telefono { get; set; }
+    public string telefono { get; set; } = string.Empty;
 
     [Column("password")]
-    public string password { get; set; }
+    public string password { get; set; } = string.Empty;
 
     [Column("activo")]
     public bool activo { get; set; } = true;
 
-    public ICollection<Inmueble> Inmuebles { get; set; }
+    public ICollection<Inmueble> Inmuebles { get; set; } = new List<Inmueble>();
 
 }

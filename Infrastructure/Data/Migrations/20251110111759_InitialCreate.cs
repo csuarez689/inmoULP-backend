@@ -23,13 +23,13 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    dni = table.Column<string>(type: "varchar(15)", nullable: true)
+                    dni = table.Column<string>(type: "varchar(15)", maxLength: 9, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     apellido = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
+                    email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     telefono = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -102,13 +102,13 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    direccion = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
+                    direccion = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ambientes = table.Column<int>(type: "int", nullable: false),
                     superficie = table.Column<int>(type: "int", nullable: false),
-                    latitud = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
+                    latitud = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    longitud = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
+                    longitud = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     tipo_id = table.Column<int>(type: "int", nullable: false),
                     uso_id = table.Column<int>(type: "int", nullable: false),
@@ -199,7 +199,7 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    detalle = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
+                    detalle = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     fecha_pago = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     monto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -356,7 +356,108 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                     { 22, 22, "/uploads/inmuebles/test_casa.jpg" },
                     { 23, 23, "/uploads/inmuebles/test_casa.jpg" },
                     { 24, 24, "/uploads/inmuebles/test_casa.jpg" },
-                    { 25, 25, "/uploads/inmuebles/test_casa.jpg" }
+                    { 25, 25, "/uploads/inmuebles/test_casa.jpg" },
+                    { 26, 26, "/uploads/inmuebles/test_casa.jpg" },
+                    { 27, 27, "/uploads/inmuebles/test_casa.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "pagos",
+                columns: new[] { "id", "contrato_id", "detalle", "estado", "fecha_pago", "monto" },
+                values: new object[,]
+                {
+                    { 1, 1, "Cuota enero 2024", true, new DateTime(2024, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 2, 1, "Cuota febrero 2024", true, new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 3, 1, "Cuota marzo 2024", true, new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 4, 1, "Cuota abril 2024", true, new DateTime(2024, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 5, 1, "Cuota mayo 2024", true, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 6, 1, "Cuota junio 2024", true, new DateTime(2024, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 10000m },
+                    { 7, 2, "Cuota mayo 2023", true, new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 8, 2, "Cuota junio 2023", true, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 9, 2, "Cuota julio 2023", true, new DateTime(2023, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 10, 2, "Cuota agosto 2023", true, new DateTime(2023, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 11, 2, "Cuota septiembre 2023", true, new DateTime(2023, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 12, 3, "Cuota julio 2024", true, new DateTime(2024, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 14000m },
+                    { 13, 3, "Cuota agosto 2024", true, new DateTime(2024, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 14000m },
+                    { 14, 3, "Cuota septiembre 2024", true, new DateTime(2024, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 14000m },
+                    { 15, 4, "Cuota noviembre 2023", true, new DateTime(2023, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 16, 4, "Cuota diciembre 2023", true, new DateTime(2023, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 17, 4, "Cuota enero 2024", true, new DateTime(2024, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 18, 4, "Cuota febrero 2024", true, new DateTime(2024, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 19, 4, "Cuota marzo 2024", true, new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 20, 4, "Cuota abril 2024", true, new DateTime(2024, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 21, 4, "Cuota mayo 2024", true, new DateTime(2024, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 22, 4, "Cuota junio 2024", true, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 9900m },
+                    { 23, 5, "Cuota febrero 2024", true, new DateTime(2024, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 15500m },
+                    { 24, 5, "Cuota marzo 2024", true, new DateTime(2024, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 15500m },
+                    { 25, 5, "Cuota abril 2024", true, new DateTime(2024, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 15500m },
+                    { 26, 5, "Cuota mayo 2024", true, new DateTime(2024, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 15500m },
+                    { 27, 6, "Cuota marzo 2024", true, new DateTime(2024, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 28, 6, "Cuota abril 2024", true, new DateTime(2024, 4, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 29, 6, "Cuota mayo 2024", true, new DateTime(2024, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 30, 6, "Cuota junio 2024", true, new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 31, 6, "Cuota julio 2024", true, new DateTime(2024, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 32, 7, "Cuota mayo 2024", true, new DateTime(2024, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 33, 7, "Cuota junio 2024", true, new DateTime(2024, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 34, 7, "Cuota julio 2024", true, new DateTime(2024, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 35, 7, "Cuota agosto 2024", true, new DateTime(2024, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 36, 7, "Cuota septiembre 2024", true, new DateTime(2024, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 37, 7, "Cuota octubre 2024", true, new DateTime(2024, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 13200m },
+                    { 38, 8, "Cuota enero 2020", true, new DateTime(2020, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 39, 8, "Cuota febrero 2020", true, new DateTime(2020, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 40, 8, "Cuota marzo 2020", true, new DateTime(2020, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 41, 8, "Cuota abril 2020", true, new DateTime(2020, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 42, 8, "Cuota mayo 2020", true, new DateTime(2020, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 43, 8, "Cuota junio 2020", true, new DateTime(2020, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 44, 8, "Cuota julio 2020", true, new DateTime(2020, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 45, 8, "Cuota agosto 2020", true, new DateTime(2020, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 46, 8, "Cuota septiembre 2020", true, new DateTime(2020, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 47, 8, "Cuota octubre 2020", true, new DateTime(2020, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5500m },
+                    { 48, 9, "Cuota junio 2019", true, new DateTime(2019, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 49, 9, "Cuota julio 2019", true, new DateTime(2019, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 50, 9, "Cuota agosto 2019", true, new DateTime(2019, 8, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 51, 9, "Cuota septiembre 2019", true, new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 52, 9, "Cuota octubre 2019", true, new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 53, 9, "Cuota noviembre 2019", true, new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 54, 9, "Cuota diciembre 2019", true, new DateTime(2019, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 55, 9, "Cuota enero 2020", true, new DateTime(2020, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 56, 9, "Cuota febrero 2020", true, new DateTime(2020, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 6800m },
+                    { 57, 10, "Cuota marzo 2018", true, new DateTime(2018, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 58, 10, "Cuota abril 2018", true, new DateTime(2018, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 59, 10, "Cuota mayo 2018", true, new DateTime(2018, 5, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 60, 10, "Cuota junio 2018", true, new DateTime(2018, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 61, 10, "Cuota julio 2018", true, new DateTime(2018, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 62, 10, "Cuota agosto 2018", true, new DateTime(2018, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 63, 10, "Cuota septiembre 2018", true, new DateTime(2018, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 6300m },
+                    { 64, 11, "Cuota septiembre 2019", true, new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 65, 11, "Cuota octubre 2019", true, new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 66, 11, "Cuota noviembre 2019", true, new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 67, 11, "Cuota diciembre 2019", true, new DateTime(2019, 12, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 68, 11, "Cuota enero 2020", true, new DateTime(2020, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 69, 11, "Cuota febrero 2020", true, new DateTime(2020, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 8000m },
+                    { 70, 12, "Cuota abril 2020", true, new DateTime(2020, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 71, 12, "Cuota mayo 2020", true, new DateTime(2020, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 72, 12, "Cuota junio 2020", true, new DateTime(2020, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 73, 12, "Cuota julio 2020", true, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 74, 12, "Cuota agosto 2020", true, new DateTime(2020, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 75, 12, "Cuota septiembre 2020", true, new DateTime(2020, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 76, 12, "Cuota octubre 2020", true, new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 77, 12, "Cuota noviembre 2020", true, new DateTime(2020, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 78, 12, "Cuota diciembre 2020", true, new DateTime(2020, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 79, 12, "Cuota enero 2021", true, new DateTime(2021, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 9000m },
+                    { 80, 13, "Cuota julio 2019", true, new DateTime(2019, 7, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 81, 13, "Cuota agosto 2019", true, new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 82, 13, "Cuota septiembre 2019", true, new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 83, 13, "Cuota octubre 2019", true, new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 84, 13, "Cuota noviembre 2019", true, new DateTime(2019, 11, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 85, 13, "Cuota diciembre 2019", true, new DateTime(2019, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 86, 13, "Cuota enero 2020", true, new DateTime(2020, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 87, 13, "Cuota febrero 2020", true, new DateTime(2020, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), 7800m },
+                    { 88, 14, "Cuota mayo 2020", true, new DateTime(2020, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 89, 14, "Cuota junio 2020", true, new DateTime(2020, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 90, 14, "Cuota julio 2020", true, new DateTime(2020, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 91, 14, "Cuota agosto 2020", true, new DateTime(2020, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m },
+                    { 92, 14, "Cuota septiembre 2020", true, new DateTime(2020, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 9500m }
                 });
 
             migrationBuilder.CreateIndex(

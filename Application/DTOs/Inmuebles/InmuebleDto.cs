@@ -1,3 +1,4 @@
+
 using InmobiliariaAPI.Domain.Entities;
 
 namespace InmobiliariaAPI.Application.DTOs.Inmuebles;
@@ -18,7 +19,7 @@ public class InmuebleDto
     public string uso_inmueble { get; set; } = string.Empty;
     public string imagen_url { get; set; } = string.Empty;
 
-    public static InmuebleDto FromEntity(Inmueble inmueble)
+    public static InmuebleDto FromEntity(Inmueble  inmueble)
     {
         return new InmuebleDto
         {

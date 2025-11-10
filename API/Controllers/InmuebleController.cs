@@ -10,12 +10,12 @@ namespace InmobiliariaAPI.API.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/propietarios/inmuebles")]
-public class InmueblesController : ControllerBase
+public class InmuebleController : ControllerBase
 {
     private readonly IInmuebleRepository _inmuebleRepository;
     private readonly IWebHostEnvironment _environment;
 
-    public InmueblesController(
+    public InmuebleController(
         IInmuebleRepository inmuebleRepository,
         IWebHostEnvironment environment)
     {
@@ -43,7 +43,7 @@ public class InmueblesController : ControllerBase
     [ServiceFilter(typeof(AuthPropietarioFilter))]
     public async Task<ActionResult<List<InmuebleDto>>> GetInmuebles()
     {
-        var propietario = (Domain.Entities.Propietario)HttpContext.Items["CurrentPropietario"]!;
+        var propietario = (Propietario)HttpContext.Items["CurrentPropietario"]!;
         var inmuebles = await _inmuebleRepository.GetByPropietario(propietario.id);
         
         return inmuebles
@@ -113,25 +113,24 @@ public class InmueblesController : ControllerBase
             return ValidationProblem(ModelState);
         }
 
-            var inmueble = new Inmueble
-            {
-                direccion = dto.direccion,
-                ambientes = dto.ambientes,
-                superficie = dto.superficie,
-                latitud = dto.latitud,
-                longitud = dto.longitud,
-                precio = dto.precio,
-                disponible = true,
-                tipo_id = dto.tipo_id,
-                uso_id = dto.uso_id,
-                propietario_id = propietario.id
-            };
+        var inmueble = new Inmueble
+        {
+            direccion = dto.direccion,
+            ambientes = dto.ambientes,
+            superficie = dto.superficie,
+            latitud = dto.latitud,
+            longitud = dto.longitud,
+            precio = dto.precio,
+            disponible = true,
+            tipo_id = dto.tipo_id,
+            uso_id = dto.uso_id,
+            propietario_id = propietario.id
+        };
 
-            var creado = await _inmuebleRepository.Create(inmueble);
+        var creado = await _inmuebleRepository.Create(inmueble);
 
         if (dto.imagen is not null && dto.imagen.Length > 0)
         {
-
             var uploadsFolder = Path.Combine(_environment.WebRootPath ?? string.Empty, "uploads", "inmuebles");
             if (!Directory.Exists(uploadsFolder))
             {

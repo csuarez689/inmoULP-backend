@@ -11,12 +11,12 @@ public class ImagenInmueble
     public int id { get; set; }
 
     [Column("url")]
-    public string url { get; set; }
+    public string url { get; set; } = string.Empty;
 
     [Column("inmueble_id")]
     public int inmueble_id { get; set; }
 
     [ForeignKey("inmueble_id")]
-    public Inmueble Inmueble { get; set; }
+    public Inmueble Inmueble { get; set; } = null!;
 
 }
