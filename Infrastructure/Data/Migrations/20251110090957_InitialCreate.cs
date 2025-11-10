@@ -219,6 +219,28 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
+                table: "inquilinos",
+                columns: new[] { "id", "apellido", "dni", "email", "nombre", "telefono" },
+                values: new object[,]
+                {
+                    { 1, "Pérez", "30111222", "juan.perez@example.com", "Juan", "2664100001" },
+                    { 2, "Giménez", "30999888", "laura.gimenez@example.com", "Laura", "2664100002" },
+                    { 3, "Sosa", "32123456", "martin.sosa@example.com", "Martín", "2664100003" },
+                    { 4, "Molina", "33987654", "carolina.molina@example.com", "Carolina", "2664100004" },
+                    { 5, "Ríos", "34111222", "pablo.rios@example.com", "Pablo", "2664100005" },
+                    { 6, "Silva", "35222333", "jimena.silva@example.com", "Jimena", "2664100006" },
+                    { 7, "López", "36888999", "ricardo.lopez@example.com", "Ricardo", "2664100007" },
+                    { 8, "Herrera", "37876543", "sofia.herrera@example.com", "Sofía", "2664100008" },
+                    { 9, "Torres", "38901234", "valeria.torres@example.com", "Valeria", "2664100009" },
+                    { 10, "Navarro", "39990123", "diego.navarro@example.com", "Diego", "2664100010" },
+                    { 11, "Ponce", "40987654", "marina.ponce@example.com", "Marina", "2664100011" },
+                    { 12, "Giuliani", "41223344", "santiago.giuliani@example.com", "Santiago", "2664100012" },
+                    { 13, "Moreno", "42556677", "celeste.moreno@example.com", "Celeste", "2664100013" },
+                    { 14, "Arias", "43667788", "federico.arias@example.com", "Federico", "2664100014" },
+                    { 15, "Correa", "44778899", "luciana.correa@example.com", "Luciana", "2664100015" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "propietarios",
                 columns: new[] { "id", "activo", "apellido", "dni", "email", "nombre", "password", "telefono" },
                 values: new object[,]
@@ -255,10 +277,10 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                 columns: new[] { "id", "ambientes", "direccion", "disponible", "latitud", "longitud", "precio", "propietario_id", "superficie", "tipo_id", "uso_id" },
                 values: new object[,]
                 {
-                    { 1, 4, "Av. España 102", true, "-33.296512", "-66.335421", 120000m, 1, 140, 1, 1 },
+                    { 1, 4, "Av. España 102", false, "-33.296512", "-66.335421", 120000m, 1, 140, 1, 1 },
                     { 2, 3, "Belgrano 450", true, "-33.297845", "-66.333210", 98000m, 1, 95, 2, 1 },
                     { 3, 2, "Junín 780", false, "-33.298762", "-66.331567", 75000m, 1, 70, 2, 1 },
-                    { 4, 5, "Mitre 1200", true, "-33.299843", "-66.336789", 145000m, 1, 180, 1, 1 },
+                    { 4, 5, "Mitre 1200", false, "-33.299843", "-66.336789", 145000m, 1, 180, 1, 1 },
                     { 5, 3, "Colón 350", false, "-33.301256", "-66.334123", 210000m, 1, 110, 3, 2 },
                     { 6, 4, "Buenos Aires 89", true, "-33.305612", "-66.337456", 152000m, 2, 160, 1, 1 },
                     { 7, 3, "Chacabuco 560", true, "-33.304123", "-66.332345", 99000m, 2, 100, 2, 1 },
@@ -278,8 +300,31 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                     { 21, 3, "Esteban Adaro 890", true, "-33.325678", "-66.353456", 142000m, 5, 115, 1, 1 },
                     { 22, 2, "Concarán 120", true, "-33.324321", "-66.356789", 88000m, 5, 82, 2, 1 },
                     { 23, 1, "Fraga 630", false, "-33.326543", "-66.358901", 105000m, 5, 50, 4, 2 },
-                    { 24, 4, "El Trapiche 270", true, "-33.327890", "-66.360123", 158000m, 5, 160, 1, 1 },
-                    { 25, 3, "Potrero de los Funes 410", false, "-33.329012", "-66.362345", 215000m, 5, 130, 3, 2 }
+                    { 24, 4, "El Trapiche 270", false, "-33.327890", "-66.360123", 158000m, 5, 160, 1, 1 },
+                    { 25, 3, "Potrero de los Funes 410", false, "-33.329012", "-66.362345", 215000m, 5, 130, 3, 2 },
+                    { 26, 3, "Riobamba 640", false, "-33.300432", "-66.332654", 99000m, 1, 118, 2, 1 },
+                    { 27, 5, "España 520", false, "-33.302145", "-66.334789", 168000m, 1, 175, 1, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "contratos",
+                columns: new[] { "id", "estado", "fecha_finalizacion", "fecha_inicio", "inmueble_id", "inquilino_id", "monto_alquiler" },
+                values: new object[,]
+                {
+                    { 1, true, new DateTime(2026, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 120000m },
+                    { 2, true, new DateTime(2025, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 2, 95000m },
+                    { 3, true, new DateTime(2026, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 11, 140000m },
+                    { 4, true, new DateTime(2025, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 26, 12, 99000m },
+                    { 5, true, new DateTime(2026, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 27, 13, 155000m },
+                    { 6, true, new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, 14, 78000m },
+                    { 7, true, new DateTime(2026, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 19, 15, 132000m },
+                    { 8, false, new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 3, 55000m },
+                    { 9, false, new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 4, 68000m },
+                    { 10, false, new DateTime(2020, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 7, 5, 63000m },
+                    { 11, false, new DateTime(2021, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 6, 80000m },
+                    { 12, false, new DateTime(2022, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 13, 7, 90000m },
+                    { 13, false, new DateTime(2021, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 21, 8, 78000m },
+                    { 14, false, new DateTime(2022, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 24, 9, 95000m }
                 });
 
             migrationBuilder.InsertData(

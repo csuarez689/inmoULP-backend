@@ -13,5 +13,18 @@ public interface IInmuebleRepository
     Task<Inmueble?> GetById(int id);
 
     Task<Inmueble?> Update(Inmueble inmueble);
-    
+
+    Task<Inmueble> Create(Inmueble inmueble);
+
+    Task<Inmueble?> SetImagenUrl(int inmuebleId, string url);
+
+    Task<bool> TipoExists(int tipoId);
+
+    Task<bool> UsoExists(int usoId);
+
+    Task<List<TipoInmueble>> GetTipos();
+
+    Task<List<UsoInmueble>> GetUsos();
+
+    Task<List<Inmueble>> GetConContratosVigentes(int propietarioId);
 }

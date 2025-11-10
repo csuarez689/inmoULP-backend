@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InmobiliariaAPI.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(InmobiliariaDbContext))]
-    [Migration("20251110063247_InitialCreate")]
+    [Migration("20251110090957_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -60,6 +60,148 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                     b.HasIndex("inquilino_id");
 
                     b.ToTable("contratos");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2026, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 1,
+                            inquilino_id = 1,
+                            montoAlquiler = 120000m
+                        },
+                        new
+                        {
+                            id = 2,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2025, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 3,
+                            inquilino_id = 2,
+                            montoAlquiler = 95000m
+                        },
+                        new
+                        {
+                            id = 3,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2026, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2024, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 4,
+                            inquilino_id = 11,
+                            montoAlquiler = 140000m
+                        },
+                        new
+                        {
+                            id = 4,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2025, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2023, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 26,
+                            inquilino_id = 12,
+                            montoAlquiler = 99000m
+                        },
+                        new
+                        {
+                            id = 5,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2026, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 27,
+                            inquilino_id = 13,
+                            montoAlquiler = 155000m
+                        },
+                        new
+                        {
+                            id = 6,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2026, 2, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2024, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 8,
+                            inquilino_id = 14,
+                            montoAlquiler = 78000m
+                        },
+                        new
+                        {
+                            id = 7,
+                            estado = true,
+                            fechaFinalizacion = new DateTime(2026, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 19,
+                            inquilino_id = 15,
+                            montoAlquiler = 132000m
+                        },
+                        new
+                        {
+                            id = 8,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2022, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 2,
+                            inquilino_id = 3,
+                            montoAlquiler = 55000m
+                        },
+                        new
+                        {
+                            id = 9,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2019, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 5,
+                            inquilino_id = 4,
+                            montoAlquiler = 68000m
+                        },
+                        new
+                        {
+                            id = 10,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2020, 2, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2018, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 7,
+                            inquilino_id = 5,
+                            montoAlquiler = 63000m
+                        },
+                        new
+                        {
+                            id = 11,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2021, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 10,
+                            inquilino_id = 6,
+                            montoAlquiler = 80000m
+                        },
+                        new
+                        {
+                            id = 12,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2022, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2020, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 13,
+                            inquilino_id = 7,
+                            montoAlquiler = 90000m
+                        },
+                        new
+                        {
+                            id = 13,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2021, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 21,
+                            inquilino_id = 8,
+                            montoAlquiler = 78000m
+                        },
+                        new
+                        {
+                            id = 14,
+                            estado = false,
+                            fechaFinalizacion = new DateTime(2022, 4, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaInicio = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            inmueble_id = 24,
+                            inquilino_id = 9,
+                            montoAlquiler = 95000m
+                        });
                 });
 
             modelBuilder.Entity("InmobiliariaAPI.Domain.Entities.ImagenInmueble", b =>
@@ -305,7 +447,7 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                             id = 1,
                             ambientes = 4,
                             direccion = "Av. España 102",
-                            disponible = true,
+                            disponible = false,
                             latitud = "-33.296512",
                             longitud = "-66.335421",
                             precio = 120000m,
@@ -347,7 +489,7 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                             id = 4,
                             ambientes = 5,
                             direccion = "Mitre 1200",
-                            disponible = true,
+                            disponible = false,
                             latitud = "-33.299843",
                             longitud = "-66.336789",
                             precio = 145000m,
@@ -627,7 +769,7 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                             id = 24,
                             ambientes = 4,
                             direccion = "El Trapiche 270",
-                            disponible = true,
+                            disponible = false,
                             latitud = "-33.327890",
                             longitud = "-66.360123",
                             precio = 158000m,
@@ -649,6 +791,34 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                             superficie = 130,
                             tipo_id = 3,
                             uso_id = 2
+                        },
+                        new
+                        {
+                            id = 26,
+                            ambientes = 3,
+                            direccion = "Riobamba 640",
+                            disponible = false,
+                            latitud = "-33.300432",
+                            longitud = "-66.332654",
+                            precio = 99000m,
+                            propietario_id = 1,
+                            superficie = 118,
+                            tipo_id = 2,
+                            uso_id = 1
+                        },
+                        new
+                        {
+                            id = 27,
+                            ambientes = 5,
+                            direccion = "España 520",
+                            disponible = false,
+                            latitud = "-33.302145",
+                            longitud = "-66.334789",
+                            precio = 168000m,
+                            propietario_id = 1,
+                            superficie = 175,
+                            tipo_id = 1,
+                            uso_id = 1
                         });
                 });
 
@@ -696,6 +866,143 @@ namespace InmobiliariaAPI.Infrastructure.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("inquilinos");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            apellido = "Pérez",
+                            dni = "30111222",
+                            email = "juan.perez@example.com",
+                            nombre = "Juan",
+                            telefono = "2664100001"
+                        },
+                        new
+                        {
+                            id = 2,
+                            apellido = "Giménez",
+                            dni = "30999888",
+                            email = "laura.gimenez@example.com",
+                            nombre = "Laura",
+                            telefono = "2664100002"
+                        },
+                        new
+                        {
+                            id = 3,
+                            apellido = "Sosa",
+                            dni = "32123456",
+                            email = "martin.sosa@example.com",
+                            nombre = "Martín",
+                            telefono = "2664100003"
+                        },
+                        new
+                        {
+                            id = 4,
+                            apellido = "Molina",
+                            dni = "33987654",
+                            email = "carolina.molina@example.com",
+                            nombre = "Carolina",
+                            telefono = "2664100004"
+                        },
+                        new
+                        {
+                            id = 5,
+                            apellido = "Ríos",
+                            dni = "34111222",
+                            email = "pablo.rios@example.com",
+                            nombre = "Pablo",
+                            telefono = "2664100005"
+                        },
+                        new
+                        {
+                            id = 6,
+                            apellido = "Silva",
+                            dni = "35222333",
+                            email = "jimena.silva@example.com",
+                            nombre = "Jimena",
+                            telefono = "2664100006"
+                        },
+                        new
+                        {
+                            id = 7,
+                            apellido = "López",
+                            dni = "36888999",
+                            email = "ricardo.lopez@example.com",
+                            nombre = "Ricardo",
+                            telefono = "2664100007"
+                        },
+                        new
+                        {
+                            id = 8,
+                            apellido = "Herrera",
+                            dni = "37876543",
+                            email = "sofia.herrera@example.com",
+                            nombre = "Sofía",
+                            telefono = "2664100008"
+                        },
+                        new
+                        {
+                            id = 9,
+                            apellido = "Torres",
+                            dni = "38901234",
+                            email = "valeria.torres@example.com",
+                            nombre = "Valeria",
+                            telefono = "2664100009"
+                        },
+                        new
+                        {
+                            id = 10,
+                            apellido = "Navarro",
+                            dni = "39990123",
+                            email = "diego.navarro@example.com",
+                            nombre = "Diego",
+                            telefono = "2664100010"
+                        },
+                        new
+                        {
+                            id = 11,
+                            apellido = "Ponce",
+                            dni = "40987654",
+                            email = "marina.ponce@example.com",
+                            nombre = "Marina",
+                            telefono = "2664100011"
+                        },
+                        new
+                        {
+                            id = 12,
+                            apellido = "Giuliani",
+                            dni = "41223344",
+                            email = "santiago.giuliani@example.com",
+                            nombre = "Santiago",
+                            telefono = "2664100012"
+                        },
+                        new
+                        {
+                            id = 13,
+                            apellido = "Moreno",
+                            dni = "42556677",
+                            email = "celeste.moreno@example.com",
+                            nombre = "Celeste",
+                            telefono = "2664100013"
+                        },
+                        new
+                        {
+                            id = 14,
+                            apellido = "Arias",
+                            dni = "43667788",
+                            email = "federico.arias@example.com",
+                            nombre = "Federico",
+                            telefono = "2664100014"
+                        },
+                        new
+                        {
+                            id = 15,
+                            apellido = "Correa",
+                            dni = "44778899",
+                            email = "luciana.correa@example.com",
+                            nombre = "Luciana",
+                            telefono = "2664100015"
+                        });
                 });
 
             modelBuilder.Entity("InmobiliariaAPI.Domain.Entities.Pago", b =>

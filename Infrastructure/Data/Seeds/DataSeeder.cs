@@ -15,6 +15,7 @@ public static class DataSeeder
         SeedInmuebles(modelBuilder);
         SeedImagenes(modelBuilder);
         SeedInquilinos(modelBuilder);
+        SeedContratos(modelBuilder);
     }
 
     private static void SeedPropietarios(ModelBuilder modelBuilder)
@@ -114,10 +115,10 @@ public static class DataSeeder
         var inmuebles = new List<Inmueble>
         {
             // Propietario 1
-            new() { id = 1, direccion = "Av. España 102", ambientes = 4, superficie = 140, latitud = "-33.296512", longitud = "-66.335421", tipo_id = 1, uso_id = 1, disponible = true, precio = 120000, propietario_id = 1 },
+            new() { id = 1, direccion = "Av. España 102", ambientes = 4, superficie = 140, latitud = "-33.296512", longitud = "-66.335421", tipo_id = 1, uso_id = 1, disponible = false, precio = 120000, propietario_id = 1 },
             new() { id = 2, direccion = "Belgrano 450", ambientes = 3, superficie = 95, latitud = "-33.297845", longitud = "-66.333210", tipo_id = 2, uso_id = 1, disponible = true, precio = 98000, propietario_id = 1 },
             new() { id = 3, direccion = "Junín 780", ambientes = 2, superficie = 70, latitud = "-33.298762", longitud = "-66.331567", tipo_id = 2, uso_id = 1, disponible = false, precio = 75000, propietario_id = 1 },
-            new() { id = 4, direccion = "Mitre 1200", ambientes = 5, superficie = 180, latitud = "-33.299843", longitud = "-66.336789", tipo_id = 1, uso_id = 1, disponible = true, precio = 145000, propietario_id = 1 },
+            new() { id = 4, direccion = "Mitre 1200", ambientes = 5, superficie = 180, latitud = "-33.299843", longitud = "-66.336789", tipo_id = 1, uso_id = 1, disponible = false, precio = 145000, propietario_id = 1 },
             new() { id = 5, direccion = "Colón 350", ambientes = 3, superficie = 110, latitud = "-33.301256", longitud = "-66.334123", tipo_id = 3, uso_id = 2, disponible = false, precio = 210000, propietario_id = 1 },
 
             // Propietario 2
@@ -145,8 +146,12 @@ public static class DataSeeder
             new() { id = 21, direccion = "Esteban Adaro 890", ambientes = 3, superficie = 115, latitud = "-33.325678", longitud = "-66.353456", tipo_id = 1, uso_id = 1, disponible = true, precio = 142000, propietario_id = 5 },
             new() { id = 22, direccion = "Concarán 120", ambientes = 2, superficie = 82, latitud = "-33.324321", longitud = "-66.356789", tipo_id = 2, uso_id = 1, disponible = true, precio = 88000, propietario_id = 5 },
             new() { id = 23, direccion = "Fraga 630", ambientes = 1, superficie = 50, latitud = "-33.326543", longitud = "-66.358901", tipo_id = 4, uso_id = 2, disponible = false, precio = 105000, propietario_id = 5 },
-            new() { id = 24, direccion = "El Trapiche 270", ambientes = 4, superficie = 160, latitud = "-33.327890", longitud = "-66.360123", tipo_id = 1, uso_id = 1, disponible = true, precio = 158000, propietario_id = 5 },
-            new() { id = 25, direccion = "Potrero de los Funes 410", ambientes = 3, superficie = 130, latitud = "-33.329012", longitud = "-66.362345", tipo_id = 3, uso_id = 2, disponible = false, precio = 215000, propietario_id = 5 }
+            new() { id = 24, direccion = "El Trapiche 270", ambientes = 4, superficie = 160, latitud = "-33.327890", longitud = "-66.360123", tipo_id = 1, uso_id = 1, disponible = false, precio = 158000, propietario_id = 5 },
+            new() { id = 25, direccion = "Potrero de los Funes 410", ambientes = 3, superficie = 130, latitud = "-33.329012", longitud = "-66.362345", tipo_id = 3, uso_id = 2, disponible = false, precio = 215000, propietario_id = 5 },
+
+            // Propietario 1 - adicionales
+            new() { id = 26, direccion = "Riobamba 640", ambientes = 3, superficie = 118, latitud = "-33.300432", longitud = "-66.332654", tipo_id = 2, uso_id = 1, disponible = false, precio = 99000, propietario_id = 1 },
+            new() { id = 27, direccion = "España 520", ambientes = 5, superficie = 175, latitud = "-33.302145", longitud = "-66.334789", tipo_id = 1, uso_id = 1, disponible = false, precio = 168000, propietario_id = 1 }
         };
 
         modelBuilder.Entity<Inmueble>().HasData(inmuebles);
@@ -189,6 +194,51 @@ public static class DataSeeder
 
     private static void SeedInquilinos(ModelBuilder modelBuilder)
     {
+        var inquilinos = new List<Inquilino>
+        {
+            new() { id = 1, dni = "30111222", nombre = "Juan", apellido = "Pérez", email = "juan.perez@example.com", telefono = "2664100001" },
+            new() { id = 2, dni = "30999888", nombre = "Laura", apellido = "Giménez", email = "laura.gimenez@example.com", telefono = "2664100002" },
+            new() { id = 3, dni = "32123456", nombre = "Martín", apellido = "Sosa", email = "martin.sosa@example.com", telefono = "2664100003" },
+            new() { id = 4, dni = "33987654", nombre = "Carolina", apellido = "Molina", email = "carolina.molina@example.com", telefono = "2664100004" },
+            new() { id = 5, dni = "34111222", nombre = "Pablo", apellido = "Ríos", email = "pablo.rios@example.com", telefono = "2664100005" },
+            new() { id = 6, dni = "35222333", nombre = "Jimena", apellido = "Silva", email = "jimena.silva@example.com", telefono = "2664100006" },
+            new() { id = 7, dni = "36888999", nombre = "Ricardo", apellido = "López", email = "ricardo.lopez@example.com", telefono = "2664100007" },
+            new() { id = 8, dni = "37876543", nombre = "Sofía", apellido = "Herrera", email = "sofia.herrera@example.com", telefono = "2664100008" },
+            new() { id = 9, dni = "38901234", nombre = "Valeria", apellido = "Torres", email = "valeria.torres@example.com", telefono = "2664100009" },
+            new() { id = 10, dni = "39990123", nombre = "Diego", apellido = "Navarro", email = "diego.navarro@example.com", telefono = "2664100010" },
+            new() { id = 11, dni = "40987654", nombre = "Marina", apellido = "Ponce", email = "marina.ponce@example.com", telefono = "2664100011" },
+            new() { id = 12, dni = "41223344", nombre = "Santiago", apellido = "Giuliani", email = "santiago.giuliani@example.com", telefono = "2664100012" },
+            new() { id = 13, dni = "42556677", nombre = "Celeste", apellido = "Moreno", email = "celeste.moreno@example.com", telefono = "2664100013" },
+            new() { id = 14, dni = "43667788", nombre = "Federico", apellido = "Arias", email = "federico.arias@example.com", telefono = "2664100014" },
+            new() { id = 15, dni = "44778899", nombre = "Luciana", apellido = "Correa", email = "luciana.correa@example.com", telefono = "2664100015" }
+        };
 
+        modelBuilder.Entity<Inquilino>().HasData(inquilinos);
+    }
+
+    private static void SeedContratos(ModelBuilder modelBuilder)
+    {
+        var contratos = new List<Contrato>
+        {
+            // Vigentes (estado true)
+            new() { id = 1, inmueble_id = 1, inquilino_id = 1, fechaInicio = new DateTime(2024, 1, 1), fechaFinalizacion = new DateTime(2026, 12, 31), montoAlquiler = 120000, estado = true },
+            new() { id = 2, inmueble_id = 3, inquilino_id = 2, fechaInicio = new DateTime(2023, 5, 1), fechaFinalizacion = new DateTime(2025, 4, 30), montoAlquiler = 95000, estado = true },
+            new() { id = 3, inmueble_id = 4, inquilino_id = 11, fechaInicio = new DateTime(2024, 7, 1), fechaFinalizacion = new DateTime(2026, 6, 30), montoAlquiler = 140000, estado = true },
+            new() { id = 4, inmueble_id = 26, inquilino_id = 12, fechaInicio = new DateTime(2023, 11, 1), fechaFinalizacion = new DateTime(2025, 10, 31), montoAlquiler = 99000, estado = true },
+            new() { id = 5, inmueble_id = 27, inquilino_id = 13, fechaInicio = new DateTime(2024, 2, 1), fechaFinalizacion = new DateTime(2026, 1, 31), montoAlquiler = 155000, estado = true },
+            new() { id = 6, inmueble_id = 8, inquilino_id = 14, fechaInicio = new DateTime(2024, 3, 1), fechaFinalizacion = new DateTime(2026, 2, 28), montoAlquiler = 78000, estado = true },
+            new() { id = 7, inmueble_id = 19, inquilino_id = 15, fechaInicio = new DateTime(2024, 5, 1), fechaFinalizacion = new DateTime(2026, 4, 30), montoAlquiler = 132000, estado = true },
+
+            // Vencidos (estado false)
+            new() { id = 8, inmueble_id = 2, inquilino_id = 3, fechaInicio = new DateTime(2020, 1, 1), fechaFinalizacion = new DateTime(2022, 12, 31), montoAlquiler = 55000, estado = false },
+            new() { id = 9, inmueble_id = 5, inquilino_id = 4, fechaInicio = new DateTime(2019, 6, 1), fechaFinalizacion = new DateTime(2021, 5, 31), montoAlquiler = 68000, estado = false },
+            new() { id = 10, inmueble_id = 7, inquilino_id = 5, fechaInicio = new DateTime(2018, 3, 1), fechaFinalizacion = new DateTime(2020, 2, 29), montoAlquiler = 63000, estado = false },
+            new() { id = 11, inmueble_id = 10, inquilino_id = 6, fechaInicio = new DateTime(2019, 9, 1), fechaFinalizacion = new DateTime(2021, 8, 31), montoAlquiler = 80000, estado = false },
+            new() { id = 12, inmueble_id = 13, inquilino_id = 7, fechaInicio = new DateTime(2020, 4, 1), fechaFinalizacion = new DateTime(2022, 3, 31), montoAlquiler = 90000, estado = false },
+            new() { id = 13, inmueble_id = 21, inquilino_id = 8, fechaInicio = new DateTime(2019, 7, 1), fechaFinalizacion = new DateTime(2021, 6, 30), montoAlquiler = 78000, estado = false },
+            new() { id = 14, inmueble_id = 24, inquilino_id = 9, fechaInicio = new DateTime(2020, 5, 1), fechaFinalizacion = new DateTime(2022, 4, 30), montoAlquiler = 95000, estado = false }
+        };
+
+        modelBuilder.Entity<Contrato>().HasData(contratos);
     }
 }

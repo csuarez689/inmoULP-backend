@@ -32,5 +32,6 @@ public class CreateInmuebleDto
     [Required(ErrorMessage = "El uso del inmueble es obligatorio")]
     public int uso_id { get; set; }
 
-    public IFormFile? imagen { get; set; }
+    [Required(ErrorMessage = "La imagen es obligatoria")]
+    public IFormFile imagen { get; set; } = default!;
 }
