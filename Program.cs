@@ -78,11 +78,6 @@ builder.Services.AddSwaggerGen(c =>
         Title = "Inmobiliaria API",
         Version = "v1",
         Description = "API REST para gestión de inmobiliaria - Proyecto ULP",
-        Contact = new OpenApiContact
-        {
-            Name = "Desarrollador",
-            Email = "csuarez689@gmail.com"
-        }
     });
 
     // configurar autenticación jwt en swagger
@@ -94,20 +89,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer"
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+    c.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 
 var app = builder.Build();
