@@ -60,7 +60,7 @@ Podés definir los mismos valores mediante variables de entorno (`ConnectionStri
    ```bash
    dotnet run
    ```
-6. La API quedará disponible en `https://localhost:5001` y `http://localhost:5000` (puerto asignado por Kestrel). Swagger se expone en `/swagger` (por ejemplo, `http://localhost:5000/swagger`).
+6. La API quedará disponible en el puerto configurado por `dotnet run`. Por defecto, el proyecto usa `http://localhost:5057`; Swagger se expone en `http://localhost:5057`.
 
 ## 🐳 Ejecución con Docker Compose
 
@@ -80,11 +80,7 @@ Podés definir los mismos valores mediante variables de entorno (`ConnectionStri
 
 ## 🗂️ Migraciones y datos semilla
 
-- Crear una nueva migración:
-  ```bash
-  dotnet ef migrations add NombreMigracion --output-dir Infrastructure/Data/Migrations
-  ```
-- Aplicar migraciones (local o dentro del contenedor):
+- Las migraciones iniciales ya están incluidas en el repositorio. Si necesitás ejecutar el seed/base de datos desde cero:
   ```bash
   dotnet ef database update
   ```
@@ -93,8 +89,8 @@ La clase `DataSeeder` se ejecuta en `OnModelCreating`, por lo que cada `database
 
 ## 📄 Documentación (Swagger)
 
-- **Ejecución local**: `http://localhost:5000/swagger` o `https://localhost:5001/swagger` (según el puerto asignado por `dotnet run`/`dotnet watch`).
-- **Docker Compose**: `http://localhost:5000/swagger` (mapeo del contenedor a tu host).
+- **Ejecución local**: `http://localhost:5057/swagger` (puerto configurado en `launchSettings.json`/`dotnet watch`).
+- **Docker Compose**: `http://localhost:5000/swagger` (mapeo del contenedor `api`).
 
 Desde allí podés probar endpoints autenticados, revisar contratos disponibles y descargar el JSON/OpenAPI.
 
