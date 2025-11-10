@@ -12,6 +12,6 @@ public interface IInmuebleRepository
 
     Task<Inmueble?> GetById(int id);
 
-    Task<Inmueble> Update(Inmueble inmueble);
-
+    Task<Inmueble?> Update(Inmueble inmueble);
+    
 }

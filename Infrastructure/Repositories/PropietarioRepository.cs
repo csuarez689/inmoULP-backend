@@ -37,44 +37,30 @@ public class PropietarioRepository : IPropietarioRepository
         return await query.FirstOrDefaultAsync(p => p.email == email);
     }
 
-    public async Task<int> Update(Propietario propietario)
+    public async Task<Propietario?> Update(Propietario propietario)
     {
-        var existing = await _context.Propietarios.FindAsync(propietario.id);
-        if (existing == null) return 0;
-
-        // Actualización explícita de cada campo
-        _context.Entry(existing).CurrentValues.SetValues(new {
-            propietario.dni,
-            propietario.nombre,
-            propietario.apellido,
-            propietario.email,
-            propietario.telefono,
-            propietario.password
-        });
-
-        return await _context.SaveChangesAsync();
+        _context.Propietarios.Update(propietario);
+        await _context.SaveChangesAsync();
+        return propietario;
     }
 
     public async Task<bool> DniExists(string dni, int? excludeId = null)
     {
-        var query = _context.Propietarios
-            .Where(p => p.dni == dni && p.activo);
-        
+        var query = _context.Propietarios.Where(p => p.dni == dni);
+
         if (excludeId.HasValue)
             query = query.Where(p => p.id != excludeId.Value);
-        
+
         return await query.AnyAsync();
     }
 
     public async Task<bool> EmailExists(string email, int? excludeId = null)
     {
-        var query = _context.Propietarios
-            .Where(p => p.email == email && p.activo);
-        
+        var query = _context.Propietarios.Where(p => p.email == email);
+
         if (excludeId.HasValue)
             query = query.Where(p => p.id != excludeId.Value);
-        
+
         return await query.AnyAsync();
     }
-
 }

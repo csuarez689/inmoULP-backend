@@ -35,13 +35,23 @@ public class InmuebleRepository : IInmuebleRepository
             .FirstOrDefaultAsync(i => i.id == id);
     }
 
-    public async Task<Inmueble> Update(Inmueble inmueble)
+    public async Task<Inmueble?> Update(Inmueble inmueble)
     {
-        _context.Inmuebles.Update(inmueble);
-        await _context.SaveChangesAsync();
-        return await GetById(inmueble.id);
-    }
+        var existing = await _context.Inmuebles
+            .Include(i => i.Tipo)
+            .Include(i => i.Uso)
+            .Include(i => i.Imagen)
+            .FirstOrDefaultAsync(i => i.id == inmueble.id);
+        
+        if (existing == null) return null;
 
+        _context.Entry(existing).CurrentValues.SetValues(new {
+            inmueble.disponible,
+        });
+
+        await _context.SaveChangesAsync();
+        return existing;
+    }
 
 
 }

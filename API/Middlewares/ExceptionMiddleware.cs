@@ -53,7 +53,7 @@ namespace InmobiliariaAPI.API.Middlewares
                 ["title"] = "Error interno del servidor",
             };
 
-            if (!env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 response["details"] = exception.Message;
                 response["trace"] = exception.StackTrace?.Split(Environment.NewLine);

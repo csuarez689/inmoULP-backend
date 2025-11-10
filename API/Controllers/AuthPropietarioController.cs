@@ -60,40 +60,41 @@ public class AuthPropietarioController : ControllerBase
     public async Task<ActionResult<PropietarioDto>> UpdateMe([FromBody] UpdatePropietarioDto dto)
     {
         var propietario = (Propietario)HttpContext.Items["CurrentPropietario"]!;
-        
-        // Validación de cambios en DNI
-        if (!dto.dni.Equals(propietario.dni))
+
+        if (!dto.dni.Equals(propietario.dni, StringComparison.Ordinal))
         {
             if (await _propietarioRepository.DniExists(dto.dni, propietario.id))
-                return BadRequest(new { 
-                    Status = 400,
-                    Title = "Error de validación",
-                    Errors = new { dni = new [] { "DNI ya registrado" } }
-                });
-            
+            {
+                return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+                {
+                    { "dni", new[] { "DNI ya registrado" } }
+                }));
+            }
+
             propietario.dni = dto.dni;
         }
 
-        // Validación de cambios en Email
         if (!dto.email.Equals(propietario.email, StringComparison.OrdinalIgnoreCase))
         {
             if (await _propietarioRepository.EmailExists(dto.email, propietario.id))
-                return BadRequest(new { 
-                    Status = 400,
-                    Title = "Error de validación",
-                    Errors = new { email = new [] { "Email ya registrado" } }
-                });
-            
+            {
+                return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+                {
+                    { "email", new[] { "Email ya registrado" } }
+                }));
+            }
+
             propietario.email = dto.email;
         }
 
-        // Actualizar campos
         propietario.nombre = dto.nombre;
         propietario.apellido = dto.apellido;
         propietario.telefono = dto.telefono;
 
-        await _propietarioRepository.Update(propietario);
-        return Ok(PropietarioDto.FromEntity(propietario));
+        var updated = await _propietarioRepository.Update(propietario);
+        return updated != null
+            ? Ok(PropietarioDto.FromEntity(updated))
+            : StatusCode(500, new ProblemDetails { Title = "Error al actualizar" });
     }
 
     [HttpPut("me/changepassword")]
@@ -104,32 +105,31 @@ public class AuthPropietarioController : ControllerBase
         var propietario = (Propietario)HttpContext.Items["CurrentPropietario"]!;
         
         // Validar contraseña actual
-        var isValid = PasswordHasher.VerifyPassword(
-            dto.CurrentPassword,
-            propietario.password,
-            _configuration["Salt"]!);
-
-        if (!isValid)
-            return BadRequest(new { 
-                Status = 400,
-                Title = "Error de validación",
-                Errors = new { currentPassword = new [] { "Contraseña actual incorrecta" } }
-            });
+        if (!PasswordHasher.VerifyPassword(dto.CurrentPassword, propietario.password, _configuration["Salt"]!))
+            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "currentPassword", new[] { "Contraseña actual incorrecta" } }
+            }));
 
         if (dto.NewPassword != dto.ConfirmPassword)
-            return BadRequest(new { 
-                Status = 400,
-                Title = "Error de validación", 
-                Errors = new { confirmPassword = new [] { "Las contraseñas no coinciden" } }
-            });
+            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "confirmPassword", new[] { "Las contraseñas no coinciden" } }
+            }));
+
+        if (dto.NewPassword == dto.CurrentPassword)
+            return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
+            {
+                { "newPassword", new[] { "La nueva contraseña debe ser diferente a la actual" } }
+            }));
 
         // Actualizar contraseña
-        propietario.password = PasswordHasher.HashPassword(
-            dto.NewPassword, 
-            _configuration["Salt"]!);
-            
-        await _propietarioRepository.Update(propietario);
-        return Ok(new { message = "Contraseña actualizada" });
+        propietario.password = PasswordHasher.HashPassword(dto.NewPassword, _configuration["Salt"]!);
+        var result = await _propietarioRepository.Update(propietario);
+        
+        return result != null
+            ? Ok(new { Message = "Contraseña actualizada" })
+            : StatusCode(500, "Error al actualizar contraseña" );
     }
 
     private string GenerateJwtToken(Propietario propietario)
